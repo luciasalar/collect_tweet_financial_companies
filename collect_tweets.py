@@ -8,6 +8,7 @@ import datetime
 import datetime as dt
 import gc
 import time
+import math
 
 def load_experiment(path_to_experiment):
     """load experiment"""
@@ -28,6 +29,7 @@ class CollectTweets:
         """Read handle files"""
 
         handles = pd.read_csv(self.datapath + filename)
+        handles = handles.dropna(subset=['link'])
         return handles
 
     def collect_tweets(self):
@@ -37,17 +39,17 @@ class CollectTweets:
         handles = self.___handles(self.handlesFile)
 
         # variable names
-        file_exists = os.path.isfile(self.outputPath + '{}_tweets.csv'.format(self.handlesFile))
+        file_exists = os.path.isfile(self.outputPath + '{}_tweets_3000.csv'.format(self.handlesFile))
 
         if not file_exists:
-            f = open(self.outputPath + '{}_tweets.csv'.format(self.handlesFile), 'a', encoding='utf-8-sig')
+            f = open(self.outputPath + '{}_tweets_3000.csv'.format(self.handlesFile), 'a', encoding='utf-8-sig')
             writer_top = csv.writer(f, delimiter=',', quoting=csv.QUOTE_MINIMAL)
             writer_top.writerow(["user_name"] + ["user_id"] + ["tweet_id"] + ["text"] + ["created_at"] + ["retweet_count"] + ["favorited"]+["favorite_count"] + ["retweeted"] + ['hashtags'] + ['mention_screen_name'] + ['mention_name'] + ['mention_id'] + ['in_reply_to_user_id'] + ['in_reply_to_status_id']  + ['coordinates']  + ['quoted_status_id_str'] + ['reply_count'] + ['quote_count'] + ['language'])
             f.close()
         
         # query timeline for each handle
         if file_exists:
-            f = open(self.outputPath + '{}_tweets.csv'.format(self.handlesFile), 'a', encoding='utf-8-sig')
+            f = open(self.outputPath + '{}_tweets_3000.csv'.format(self.handlesFile), 'a', encoding='utf-8-sig')
             writer_top = csv.writer(f, delimiter=',', quoting=csv.QUOTE_MINIMAL)
 
             # read each handle
@@ -75,14 +77,14 @@ class CollectTweets:
 
         # read handle list
         handles = self.___handles(self.handlesFile)
-
+       
         # variable names
         file_exists = os.path.isfile(self.outputPath + '{}_profile.csv'.format(self.handlesFile))
 
         if not file_exists:
             f = open(self.outputPath + '{}_profile.csv'.format(self.handlesFile), 'a', encoding='utf-8-sig')
             writer_top = csv.writer(f, delimiter=',', quoting=csv.QUOTE_MINIMAL)
-            writer_top.writerow(["user_id"] + ["screen_name"] + ["location"] + ["user_description"] + ["followers_count"] + ["friends_count"] + ["account_created_at"] + ["favourites_count"] + ["statuses_count"] + ["user_url"] + ["listed_count"] + ["protected"] + ["verified"])
+            writer_top.writerow(["user_id"] + ["screen_name"] + ["company"] + ["location"] + ["user_description"] + ["followers_count"] + ["friends_count"] + ["account_created_at"] + ["favourites_count"] + ["statuses_count"] + ["user_url"] + ["listed_count"] + ["protected"] + ["verified"])
             f.close()
 
         # query user profile for each handle
@@ -90,20 +92,35 @@ class CollectTweets:
             f = open(self.outputPath + '{}_profile.csv'.format(self.handlesFile), 'a', encoding='utf-8-sig')
             writer_top = csv.writer(f, delimiter=',', quoting=csv.QUOTE_MINIMAL)
 
-            for handle in handles.handles:
-                user = api.get_user(handle)
-                content = [[user.id_str, user.screen_name, user.location, user.description, user.followers_count, user.friends_count, user.created_at, user.favourites_count, user.statuses_count, user.url, user.listed_count, user.protected, user.verified]]
-                writer_top.writerows(content)
+            for link, company in zip(handles['link'], handles['company']):
+                # get handle name from link
+                if len(link.split('/')) > 3:
+                    handle = link.split('/')[3]
+                    print(handle)
+
+                else: 
+                    handle = link.split('/')[1]
+                    print(handle)
+
+                try:
+                    user = api.get_user(handle)
+                    content = [[user.id_str, user.screen_name, company, user.location, user.description, user.followers_count, user.friends_count, user.created_at, user.favourites_count, user.statuses_count, user.url, user.listed_count, user.protected, user.verified]]
+                    writer_top.writerows(content)
+                except tw.TweepError:
+                    continue
+
+
+            
             f.close()
             gc.collect()
 
-        return user
+        #return user§
 
      
 
 
 #load environment, change env path
-evn_path = '/disk/data/share/s1690903/collect_tweets/environment/'
+evn_path = '/disk/data/share/s1690903/collect_tweets_Ewelina/environment/'
 env = load_experiment(evn_path + 'env.yaml')
 
 # query api
@@ -112,16 +129,16 @@ auth.set_access_token(env['twitter_api']['access_token'], env['twitter_api']['ac
 api = tw.API(auth, wait_on_rate_limit=True)
 
 
-inputP = '/disk/data/share/s1690903/collect_tweets/data/'
-outputP = '/disk/data/share/s1690903/collect_tweets/data/tweets/'
-handles = 'handle_list_1.csv'
+inputP = '/disk/data/share/s1690903/collect_tweets_Ewelina/data/'
+outputP = '/disk/data/share/s1690903/collect_tweets_Ewelina/data/tweets/'
+handles = 'handle_list_finance_health.csv'
+number_of_tweets = 3000
 
-
-collect = CollectTweets(inputP, outputP, handles, number_of_tweets)
+collect = CollectTweets(inputP, outputP, handles)
 #collect tweets
-tweets = collect.collect_tweets()#change input handles
+#tweets = collect.collect_tweets()#change input handles
 #collect author profile
-#Users = collect.collect_user()#change input handles
+collect.collect_user()#change input handles
 
 
 

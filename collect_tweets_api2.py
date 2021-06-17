@@ -38,7 +38,7 @@ class CollectTweets:
         headers = {"Authorization": "Bearer {}".format(self.bearer_token)}
 
         url = "https://api.twitter.com/2/tweets/search/all?query={}&{}&max_results=500&until_id={}".format(
-            self.query, self.tweet_fields, self.until_id)
+            self.query, self.tweet_fields, self.until_id) 
         response = requests.request("GET", url, headers=headers)
 
         #print(response.status_code)
@@ -50,7 +50,7 @@ class CollectTweets:
 
 
 
-    def get_tweets(self):
+    def get_tweets(self, company):
 
         search_result = self.search_twitter()
 
@@ -59,13 +59,13 @@ class CollectTweets:
         if not file_exists:
             f = open(self.outputPath + '{}.csv'.format(self.outputFile), 'a', encoding='utf-8-sig')
             writer_top = csv.writer(f, delimiter=',', quoting=csv.QUOTE_MINIMAL)
-            writer_top.writerow(["text"] + ["author_id"] + ["created_at"] + ["conversation_id"] + ["tweet_id"] + ["retweet_count"] + ['reply_count'] + ['like_count'] + ['quote_count'] + ['in_reply_to_user_id'] + ["referenced_tweets_type"] + ["reference_tweet_id"])
+            writer_top.writerow(["text"] + ["author_id"] + ["created_at"] + ["conversation_id"] + ["tweet_id"] + ["retweet_count"] + ['reply_count'] + ['like_count'] + ['quote_count'] + ['in_reply_to_user_id'] + ["referenced_tweets_type"] + ["reference_tweet_id"] + ['account_name'])
             f.close()
 
         # query user profile for each handle
         if file_exists:
-            with open(self.outputPath + '{}.json'.format(self.outputFile), 'a') as f:
-                json.dump(search_result, f)
+            # with open(self.outputPath + '{}.json'.format(self.outputFile), 'a') as f:
+            #     json.dump(search_result, f)
 
             f = open(self.outputPath + '{}.csv'.format(self.outputFile), 'a', encoding='utf-8-sig')
             writer_top = csv.writer(f, delimiter=',', quoting=csv.QUOTE_MINIMAL)
@@ -73,17 +73,17 @@ class CollectTweets:
             for tweet in search_result['data']: 
             #here I check whether in in_reply_to_user_id and referenced tweets are 
                 if ('in_reply_to_user_id' in tweet.keys()) & ('referenced_tweets' not in tweet.keys()):
-                     content = [[tweet['text'], tweet['author_id'], tweet['created_at'], tweet['conversation_id'], tweet['id'], tweet['public_metrics']['retweet_count'], tweet['public_metrics']['reply_count'], tweet['public_metrics']['like_count'], tweet['public_metrics']['quote_count'], tweet['in_reply_to_user_id'],  None, None]]
+                     content = [[tweet['text'], tweet['author_id'], tweet['created_at'], tweet['conversation_id'], tweet['id'], tweet['public_metrics']['retweet_count'], tweet['public_metrics']['reply_count'], tweet['public_metrics']['like_count'], tweet['public_metrics']['quote_count'], tweet['in_reply_to_user_id'],  None, None, company]]
 
                 elif ('in_reply_to_user_id' in tweet.keys()) & ('referenced_tweets' in tweet.keys()):
-                    content = [[tweet['text'], tweet['author_id'], tweet['created_at'], tweet['conversation_id'], tweet['id'], tweet['public_metrics']['retweet_count'], tweet['public_metrics']['reply_count'], tweet['public_metrics']['like_count'], tweet['public_metrics']['quote_count'], tweet['in_reply_to_user_id'],  tweet['referenced_tweets'][0]['type'], tweet['referenced_tweets'][0]['id']]]
+                    content = [[tweet['text'], tweet['author_id'], tweet['created_at'], tweet['conversation_id'], tweet['id'], tweet['public_metrics']['retweet_count'], tweet['public_metrics']['reply_count'], tweet['public_metrics']['like_count'], tweet['public_metrics']['quote_count'], tweet['in_reply_to_user_id'],  tweet['referenced_tweets'][0]['type'], tweet['referenced_tweets'][0]['id'], company]]
 
 
                 elif ('in_reply_to_user_id' not in tweet.keys()) & ('referenced_tweets' in tweet.keys()):
-                    content = [[tweet['text'], tweet['author_id'], tweet['created_at'], tweet['conversation_id'], tweet['id'], tweet['public_metrics']['retweet_count'], tweet['public_metrics']['reply_count'], tweet['public_metrics']['like_count'], tweet['public_metrics']['quote_count'], None,  tweet['referenced_tweets'][0]['type'], tweet['referenced_tweets'][0]['id']]]
+                    content = [[tweet['text'], tweet['author_id'], tweet['created_at'], tweet['conversation_id'], tweet['id'], tweet['public_metrics']['retweet_count'], tweet['public_metrics']['reply_count'], tweet['public_metrics']['like_count'], tweet['public_metrics']['quote_count'], None,  tweet['referenced_tweets'][0]['type'], tweet['referenced_tweets'][0]['id'], company]]
               
                 else:
-                    content = [[tweet['text'], tweet['author_id'], tweet['created_at'], tweet['conversation_id'], tweet['id'], tweet['public_metrics']['retweet_count'], tweet['public_metrics']['reply_count'], tweet['public_metrics']['like_count'], tweet['public_metrics']['quote_count'], None, None, None]]
+                    content = [[tweet['text'], tweet['author_id'], tweet['created_at'], tweet['conversation_id'], tweet['id'], tweet['public_metrics']['retweet_count'], tweet['public_metrics']['reply_count'], tweet['public_metrics']['like_count'], tweet['public_metrics']['quote_count'], None, None, None, company]]
                 writer_top.writerows(content)
         return search_result
 
@@ -105,6 +105,7 @@ class Loop_files:
         """Read handle files"""
 
         handles = pd.read_csv(outputP + self.handlesFile)
+        handles = handles.iloc[25::]
         return handles
 
 
@@ -127,7 +128,7 @@ class Loop_files:
     def big_loop(self):
         handles = self.read_handles(self.handlesFile)
 
-        for handle, status in zip(handles['screen_name'], handles['statuses_count']):
+        for handle, status, company in zip(handles['screen_name'], handles['statuses_count'], handles['company']):
             # get handle name and pass it to query
             query = 'from:{}'.format(handle)
 
@@ -137,7 +138,9 @@ class Loop_files:
             #get the most recent 10 tweets of an account
             search_result = self.search_twitter_recent(self.bearer_token, query, self.tweet_fields)
             #You want to get the most recent post id as the until id
-            until_id = search_result['data'][1]['id']
+            try:
+                until_id = search_result['data'][1]['id']
+
             # if handle=='eu_eeas':
             #     until_id = 707221617353617000
 
@@ -145,27 +148,39 @@ class Loop_files:
             #     until_id = search_result['data'][1]['id']
 
             # here you can manually reset the id
-            print(query, loop_num, until_id)
-            time.sleep(5) #check rate limit to adjust this
+                print(query, loop_num, until_id)
+                time.sleep(5) #check rate limit to adjust this
             #https://developer.twitter.com/en/docs/twitter-api/rate-limits#v2-limits 
             
 
             # loop everything
         
-            for i in range(1, loop_num + 1):
+                for i in range(1, loop_num + 1):
 
-                print('this is the {} loop'.format(i))
-                # collect tweets using query, for each loop, we get 500 tweets
-                c = CollectTweets(inputP=self.inputP, outputP=self.outputP, bearer_token=self.bearer_token, tweet_fields=self.tweet_fields, query=query, until_id=until_id, outputFile=self.outputFile)
-                #search_result = c.search_twitter()
-                search_result = c.get_tweets()  #store result
-                print('search id:', search_result['data'][-1]['id'])
+                    print('this is the {} loop'.format(i))
+                    # collect tweets using query, for each loop, we get 500 tweets
+                    c = CollectTweets(inputP=self.inputP, outputP=self.outputP, bearer_token=self.bearer_token, tweet_fields=self.tweet_fields, query=query, until_id=until_id, outputFile=self.outputFile)
+                    #search_result = c.search_twitter()
+                    search_result = c.get_tweets(company)  #store result
 
-                #set the new until_id as the last one on the list, next loop will continue up to this id
-                new_until_id = search_result['data'][-1]['id']
-                until_id = new_until_id
+                    # print the tweet id in search
+                    try:
+                        print('search id:', search_result['data'][-1]['id'])
 
-                time.sleep(5)#sleep 10s
+                        #set the new until_id as the last one on the list, next loop will continue up to this id
+                        new_until_id = search_result['data'][-1]['id']
+                        until_id = new_until_id
+
+                        time.sleep(5)# sleep 10s
+
+                    except KeyError:
+                        continue
+
+            except (KeyError, IndexError):
+                pass
+
+            #return search_result
+
 
                 
                 # if time.time() > timeout:
@@ -174,22 +189,23 @@ class Loop_files:
                
 
 
-evn_path = '/disk/data/share/s1690903/collect_tweets/environment/'
+evn_path = '/disk/data/share/s1690903/collect_tweets_Ewelina/environment/'
 env = load_experiment(evn_path + 'env.yaml')
 
 
-inputP = '/disk/data/share/s1690903/collect_tweets/data/'
-outputP = '/disk/data/share/s1690903/collect_tweets/data/tweets/'
-handles = 'handle_list_1.csv'
-bearer_token = env['twitter_api']['bearer_token']
+inputP = '/disk/data/share/s1690903/collect_tweets_Ewelina/data/'
+outputP = '/disk/data/share/s1690903/collect_tweets_Ewelina/data/tweets/'
+handles = 'handle_list_finance_health2.csv'
+bearer_token = env['twitter_api2']['bearer_token']
 tweet_fields = "tweet.fields=text,author_id,created_at,conversation_id,in_reply_to_user_id,referenced_tweets,public_metrics"
-handlesFile = 'handle_list_1.csv_profile.csv'
-outputFile='all_tweets'
+handlesFile = 'handle_list_finance_health.csv_profile.csv'
+outputFile = 'all_tweets_finance_health4'
 
 
 lf = Loop_files(datapath=inputP, outputPath=outputP, token=bearer_token, tweet_fields=tweet_fields, handlesFile=handlesFile,outputFile=outputFile)
 
 lf.big_loop()
+#search_result = self.search_twitter()
 
 #Exception: (429, '{"title":"Too Many Requests","type":"about:blank","status":429,"detail":"Too Many Requests"}')
 
