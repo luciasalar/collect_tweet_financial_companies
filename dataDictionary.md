@@ -1,14 +1,42 @@
 
 
-## Using converstation id to recover a conversation
-You can group tweets according to conversation id to recover a conversation
-
 
 # files description and data dictionary
 
-##all_tweets_finance_health_final.csv  (1,546,567 lines) 
+##all_tweets_finance_health_final.csv  (1,546,567 lines, data from 93 accounts) 
 
-### description: all the tweets from the accounts on the list
+### description: all the tweets from 93 accounts on the list. 
+
+There are 120 accounts on the list
+We did not manage to collect data for the below companies, 12 of them do not have a twitter account:
+
+Affiliated Managers Group Inc.
+Berkshire Hathaway
+Chubb Limited
+Cincinnati Financial
+Everest Re Group Ltd.
+Huntington Bancshares
+Intercontinental Exchange
+Leucadia National Corp.
+Loews Corp.
+Marsh & McLennan
+People's United Financial
+Prudential Financial
+S&P Global Inc.
+Abbott Laboratories
+Align Technology
+Allergan
+Celgene
+Danaher
+Envision Healthcare
+HCA
+IDEXX Laboratories
+Laboratory
+Mettler-Toledo International
+Mylan
+Patterson Companies
+Perrigo Company
+Stryker
 
 ### variables:
 
@@ -50,6 +78,18 @@ pos: positive
 neu: neutral 
 
 compound: combined
+
+***keyword count***
+
+keyword count for various topics
+
+promotion
+
+price
+
+product
+
+place
 
 *** readability ***
 
