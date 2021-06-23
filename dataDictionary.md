@@ -2,7 +2,9 @@
 
 
 # files description and data dictionary
+Please always use author_id, tweet_id to match in between the files, company name, account name is only for your reference. 
 
+# tweet files:
 ##all_tweets_finance_health_final.csv  (1,546,567 lines, data from 93 accounts) 
 
 ### description: all the tweets from 93 accounts on the list. 
@@ -38,7 +40,12 @@ Patterson Companies
 Perrigo Company
 Stryker
 
-### variables:
+
+##all_tweets_finance_IT.csv 
+
+##all_tweets_airline.csv 
+
+# variable descriptions:
 
 text: tweet
 
@@ -69,7 +76,7 @@ account_name: the name of the companies (see the Google spreadsheet)
 
 ***scores***
 
-**vader scores**
+**vader scores** both finance and IT firms 
 
 neg: negative
 
@@ -79,7 +86,7 @@ neu: neutral
 
 compound: combined
 
-***keyword count***
+***keyword count*** only IT firms have this one
 
 keyword count for various topics
 
@@ -91,11 +98,15 @@ product
 
 place
 
-*** readability ***
+*** readability *** Finance
 
 flesch_reading_ease:  The Flesch Reading Ease gives a text a score between 1 and 100, with 100 being the highest readability score. Scoring between 70 to 80 is equivalent to school grade level 8. 
 
-### all_reference_tweets.csv (x lines, still collecting) 
+# reference tweet files
+
+finance_health_reference_tweets.csv (extra, you can ignore this file)
+
+IT_reference_tweets.csv
 
 ### description: all the parent tweets
 
@@ -115,7 +126,14 @@ reference_author: author name
 
 handle: screen name of the author
 
+# account profile
+
 ## handle_list_finance_health_profile.csv
+
+## handle_list_IT_profile.csv
+
+## handle_list_airline_profile.csv
+
 
 ### description: tweeter profile of the companies
 
