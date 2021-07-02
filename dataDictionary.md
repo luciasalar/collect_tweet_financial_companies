@@ -57,6 +57,7 @@ Stryker
 *all the tweets from IT firms*
 
 **Scores:**
+
 * vader, keyword count all in one file*
 
 missing accounts:
@@ -126,7 +127,7 @@ Visa Inc.
 
 *all the tweets from the CEO, here the 'account_name' is the CEO name*
 
-**scores**
+**Scores:**
 
 Vader score, LIWC in separate file
 
@@ -136,7 +137,7 @@ Vader score, LIWC in separate file
 
 to be determined: you need another script to match whether the retweet is from the CEO's company
 
-**scores**
+**Scores:**
 
 Vader score, LIWC in separate file
 
@@ -169,7 +170,7 @@ reference_tweet_id: A list of Tweets this Tweet refers to. For example, if the p
 
 account_name: the name of the companies (see the Google spreadsheet)
 
-***scores***
+**Scores:**
 
 **vader scores** (both finance and IT firms) 
 https://pypi.org/project/vaderSentiment/ 
