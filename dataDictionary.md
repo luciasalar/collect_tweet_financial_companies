@@ -7,6 +7,8 @@
 
 * Remove the duplicated tweet_ids after you read each file 
 
+* the 'tweet_id' in a reference tweet file match with 'reference_tweet_it' in the tweet file, for example: all_tweets_IT_scores_topic.csv and All_IT_tweets_reference.csv 
+ 
 # tweet files:
 ## all_tweets_finance_health_final.csv  (1,546,567 lines, data from 93 accounts) 
 
@@ -125,6 +127,7 @@ Visa Inc.
 *all the tweets from the CEO, here the 'account_name' is the CEO name*
 
 **scores**
+
 Vader score, LIWC in separate file
 
 
@@ -134,6 +137,7 @@ Vader score, LIWC in separate file
 to be determined: you need another script to match whether the retweet is from the CEO's company
 
 **scores**
+
 Vader score, LIWC in separate file
 
 # variable descriptions for tweet file:
@@ -161,7 +165,7 @@ in_reply_to_user_id: author of the parent post
 
 referenced_tweets_type: is the parent post a quote or reply
 
-reference_tweet_id: A list of Tweets this Tweet refers to. For example, if the parent Tweet is a Retweet, a Retweet with comment (also known as Quoted Tweet) or a Reply, it will include the related Tweet referenced to by its parent. *warning:I found this id doesn't match with the parent post id. What I did in the script was to use another lib to retreive the parent post id seperately. Therefore, please ignore this variable*
+reference_tweet_id: A list of Tweets this Tweet refers to. For example, if the parent Tweet is a Retweet, a Retweet with comment (also known as Quoted Tweet) or a Reply, it will include the related Tweet referenced to by its parent. 
 
 account_name: the name of the companies (see the Google spreadsheet)
 
@@ -196,14 +200,6 @@ https://pypi.org/project/textstat/
 flesch_reading_ease:  The Flesch Reading Ease gives a text a score between 1 and 100, with 100 being the highest readability score. Scoring between 70 to 80 is equivalent to school grade level 8. 
 
 # variable descriptions for reference tweet files
-
-finance_health_reference_tweets.csv (extra, you can ignore this file)
-
-All_IT_tweets_reference.csv, all the referenced tweets from IT firms
-
-conversation_airline.csv, conversation from airline companies
-
-ceo_reference_tweets_all.csv, all the referenced tweets from the CEO, you need another script to match whether the retweet is from the CEO's company
 
 ### description: all the parent tweets
 
