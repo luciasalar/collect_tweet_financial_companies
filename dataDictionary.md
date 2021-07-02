@@ -8,7 +8,7 @@
 * Remove the duplicated tweet_ids after you read each file 
 
 # tweet files:
-##all_tweets_finance_health_final.csv  (1,546,567 lines, data from 93 accounts) 
+## all_tweets_finance_health_final.csv  (1,546,567 lines, data from 93 accounts) 
 
 *all the tweets from finance companies*
 
@@ -50,7 +50,7 @@ Stryker
 ## finance_health_reference_tweets.csv (extra, you can ignore this file)
 
 
-##all_tweets_IT_scores_topic.csv 1,101,151 lines
+## all_tweets_IT_scores_topic.csv 1,101,151 lines
 
 *all the tweets from IT firms*
 
@@ -83,7 +83,7 @@ text_reference: referenced text
 
 text: text of the parent tweet
 
-##all_tweets_airline.csv 
+## all_tweets_airline.csv 
 
 all tweets and conversation from airline companies, 
 to do task: emotion
@@ -94,10 +94,10 @@ Alaska Air Group
 American Airlines Group
 United Airlines Holdings
 
-##conversation_airline.csv 
+## conversation_airline.csv 
 conversation from airline companies, here we manage to collect all the conversations in a thread
 
-##all_tweets_c_suit_company.csv 
+## all_tweets_c_suit_company.csv 
 
 all the tweets from the c-suite companies, 
 
@@ -120,7 +120,7 @@ Simon Property Group
 Tesla, Inc.
 Visa Inc.
 
-##all_tweets_c_suit_ceo.csv 
+## all_tweets_c_suit_ceo.csv 
 
 *all the tweets from the CEO, here the 'account_name' is the CEO name*
 
@@ -132,7 +132,6 @@ Vader score, LIWC in separate file
 ## ceo_reference_tweets_all.csv, all the referenced tweets from the CEO,
 
 to be determined: you need another script to match whether the retweet is from the CEO's company
-
 
 **scores**
 Vader score, LIWC in separate file
