@@ -12,7 +12,7 @@
 # tweet files:
 
 ## Finance Health
-### tweets_all_scores_final_finance.csv  (1,546,567 lines, data from 93 accounts) 
+### tweet_file/tweets_all_scores_final_finance.csv  (1,546,567 lines, data from 93 accounts) 
 
 *all the tweets from finance companies*
 
@@ -99,7 +99,7 @@ all tweets and conversation from airline companies,
 
 *emotion score on separate file* 
 
-### emotion_all_tweets_airline.csv
+### emotion_score/emotion_all_tweets_airline.csv
 
 missing accounts: 
 
@@ -145,8 +145,8 @@ Visa Inc.
 
 Vader score, LIWC in separate file
 
-### ceo_tweets_all_vader.csv
-### liwc_all_tweets_c_suit_ceo.csv
+### vader_score/ceo_tweets_all_vader.csv
+### liwc/liwc_all_tweets_c_suit_ceo.csv
 
 ### reference_conversation_tweets/ceo_reference_tweets_all.csv, all the referenced tweets from the CEO,
 
@@ -156,10 +156,10 @@ to be determined: you need another script to match whether the retweet is from t
 
 Vader score, LIWC in separate file
 
-### ceo_tweets_reference_vader.csv
-### liwc_ceo_reference_tweets_all.csv
+### vader_score/ceo_tweets_reference_vader.csv
+### liwc/liwc_ceo_reference_tweets_all.csv
 
-# variable descriptions for tweet file:
+# Variable Descriptions for Tweet File:
 
 text: tweet
 
@@ -218,7 +218,7 @@ https://pypi.org/project/textstat/
 
 flesch_reading_ease:  The Flesch Reading Ease gives a text a score between 1 and 100, with 100 being the highest readability score. Scoring between 70 to 80 is equivalent to school grade level 8. 
 
-# variable descriptions for reference tweet files
+# Variable Descriptions for Reference Tweet Files
 
 ### description: all the parent tweets
 
@@ -238,15 +238,23 @@ reference_author: author name
 
 handle: screen name of the author
 
-# account profile
+# Account Profile 
 
-## handle_list_finance_health_profile.csv
+Twitter Profile of the collected accounts 
 
-## handle_list_IT_profile.csv
+### /account profiles
 
-## handle_list_airline_profile.csv
+### handle_list_finance_health_profile.csv
 
-### description: tweeter profile of the companies
+### handle_list_IT_profile.csv
+
+### handle_list_airline_profile.csv
+
+### handle_c_suite.csv_profile_ceo.csv
+
+### handle_c_suite.csv_profile.csv
+
+## description: tweeter profile of the companies
 
 user_id: unique id for the company account
 
