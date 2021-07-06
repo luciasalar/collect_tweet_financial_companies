@@ -1,7 +1,7 @@
 
 
 
-# files description and data dictionary
+# Files Description and Data Dictionary
 
 * Please always use author_id, tweet_id to match the files, company name, account name is only for your reference. 
 
@@ -9,7 +9,7 @@
 
 * the 'tweet_id' in a reference tweet file match with 'reference_tweet_it' in the tweet file, for example: all_tweets_IT_scores_topic.csv and All_IT_tweets_reference.csv 
  
-# tweet files:
+# File Description:
 
 ## Finance Health
 ### tweet_file/tweets_all_scores_final_finance.csv  (1,546,567 lines, data from 93 accounts) 
