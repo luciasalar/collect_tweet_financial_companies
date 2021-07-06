@@ -94,7 +94,12 @@ text: text of the parent tweet
 ### tweet_file/all_tweets_airline.csv 
 
 all tweets and conversation from airline companies, 
-to do task: emotion
+
+**score** 
+
+*emotion score on separate file* 
+
+### emotion_all_tweets_airline.csv
 
 missing accounts: 
 
@@ -104,6 +109,8 @@ United Airlines Holdings
 
 ### reference_conversation_tweets/conversation_airline.csv 
 conversation from airline companies, here we manage to collect all the conversations in a thread
+
+**conversation is currently still being collected, I can run the emotion score on it once it's finished**
 
 ## C suite
 
@@ -138,7 +145,8 @@ Visa Inc.
 
 Vader score, LIWC in separate file
 
-
+### ceo_tweets_all_vader.csv
+### liwc_all_tweets_c_suit_ceo.csv
 
 ### reference_conversation_tweets/ceo_reference_tweets_all.csv, all the referenced tweets from the CEO,
 
@@ -147,6 +155,9 @@ to be determined: you need another script to match whether the retweet is from t
 **Scores:**
 
 Vader score, LIWC in separate file
+
+### ceo_tweets_reference_vader.csv
+### liwc_ceo_reference_tweets_all.csv
 
 # variable descriptions for tweet file:
 
