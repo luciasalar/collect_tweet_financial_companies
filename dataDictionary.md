@@ -10,7 +10,9 @@
 * the 'tweet_id' in a reference tweet file match with 'reference_tweet_it' in the tweet file, for example: all_tweets_IT_scores_topic.csv and All_IT_tweets_reference.csv 
  
 # tweet files:
-## all_tweets_finance_health_final.csv  (1,546,567 lines, data from 93 accounts) 
+
+## Finance Health
+### tweets_all_scores_final_finance.csv  (1,546,567 lines, data from 93 accounts) 
 
 *all the tweets from finance companies*
 
@@ -49,10 +51,9 @@ Patterson Companies
 Perrigo Company
 Stryker
 
-## finance_health_reference_tweets.csv (extra, you can ignore this file)
+## IT tweets
 
-
-## all_tweets_IT_scores_topic.csv 1,101,151 lines
+### tweet_file/all_tweets_IT_scores_topic.csv 1,101,151 lines
 
 *all the tweets from IT firms*
 
@@ -80,13 +81,17 @@ Time Warner
 Total System Services
 Visa
 
-## All_IT_tweets_reference.csv, all the referenced tweets from IT firms
+### reference_conversation_tweets/IT_reference_tweets1.csv, referenced tweets from IT firms (part1)
+### reference_conversation_tweets/IT_reference_tweets2.csv, referenced tweets from IT firms (part2)
+
 
 text_reference: referenced text
 
 text: text of the parent tweet
 
-## all_tweets_airline.csv 
+## Airline Tweets
+
+### tweet_file/all_tweets_airline.csv 
 
 all tweets and conversation from airline companies, 
 to do task: emotion
@@ -97,10 +102,12 @@ Alaska Air Group
 American Airlines Group
 United Airlines Holdings
 
-## conversation_airline.csv 
+### reference_conversation_tweets/conversation_airline.csv 
 conversation from airline companies, here we manage to collect all the conversations in a thread
 
-## all_tweets_c_suit_company.csv 
+## C suite
+
+### tweet_file/all_tweets_c_suit_company.csv 
 
 all the tweets from the c-suite companies, 
 
@@ -123,7 +130,7 @@ Simon Property Group
 Tesla, Inc.
 Visa Inc.
 
-## all_tweets_c_suit_ceo.csv 
+### tweet_file/all_tweets_c_suit_ceo.csv 
 
 *all the tweets from the CEO, here the 'account_name' is the CEO name*
 
@@ -133,7 +140,7 @@ Vader score, LIWC in separate file
 
 
 
-## ceo_reference_tweets_all.csv, all the referenced tweets from the CEO,
+### reference_conversation_tweets/ceo_reference_tweets_all.csv, all the referenced tweets from the CEO,
 
 to be determined: you need another script to match whether the retweet is from the CEO's company
 
