@@ -7,7 +7,7 @@
 
 * Remove the duplicated tweet_ids after you read each file 
 
-* the 'tweet_id' in a reference tweet file match with 'reference_tweet_it' in the tweet file, for example: all_tweets_IT_scores_topic.csv and All_IT_tweets_reference.csv 
+* the 'tweet_id' in a reference tweet file (path:/reference_conversation_tweets/) match with 'reference_tweet_id' in the tweet file (path:/tweet_file/), for example: all_tweets_IT_scores_topic.csv and All_IT_tweets_reference.csv, 'tweet_id' in all_reference_c_suit_cmo.csv match with 'reference_tweet_it' in 'all_tweets_c_suit_cmo.csv'
  
 # File Description:
 
@@ -24,31 +24,57 @@
 missing accounts:
 
 Affiliated Managers Group Inc.
+
 Berkshire Hathaway
+
 Chubb Limited
+
 Cincinnati Financial
+
 Everest Re Group Ltd.
+
 Huntington Bancshares
+
 Intercontinental Exchange
+
 Leucadia National Corp.
+
 Loews Corp.
+
 Marsh & McLennan
+
 People's United Financial
+
 Prudential Financial
+
 S&P Global Inc.
+
 Abbott Laboratories
+
 Align Technology
+
 Allergan
+
 Celgene
+
 Danaher
+
 Envision Healthcare
+
 HCA
+
 IDEXX Laboratories
+
 Laboratory
+
 Mettler-Toledo International
+
 Mylan
+
 Patterson Companies
+
 Perrigo Company
+
 Stryker
 
 ## IT tweets
@@ -64,21 +90,37 @@ Stryker
 missing accounts:
 
 Alliance Data Systems
+
 Alphabet A (ex Google)
+
 Alphabet C (ex Google)
+
 Amphenol
+
 Apple
+
 Applied Materials
+
 CA
+
 eBay
+
 F5 Networks
+
 Harris
+
 IBM
+
 KLA-Tencor
+
 Micron Technology
+
 Microsoft
+
 Time Warner
+
 Total System Services
+
 Visa
 
 ### reference_conversation_tweets/IT_reference_tweets1.csv, referenced tweets from IT firms (part1)
@@ -121,33 +163,57 @@ all the tweets from the c-suite companies,
 missing accounts:
 
 American Tower
+
 Boeing Co.
+
 Biogen
+
 Berkshire Hathaway
+
 Costco Wholesale Corp.
+
 DuPont de Nemours Inc.
+
 Danaher Corporation
+
 The Walt Disney Company
+
 Alphabet Inc. (Class A)
+
 Linde plc
+
 Medtronic plc
+
 Microsoft
+
 Raytheon Technologies
+
 Simon Property Group
+
 Tesla, Inc.
+
 Visa Inc.
 
 ### tweet_file/all_tweets_c_suit_ceo.csv 
+### tweet_file/all_tweets_c_suit_cfo.csv (new)
+### tweet_file/all_tweets_c_suit_cmo.csv (new)
 
-*all the tweets from the CEO, here the 'account_name' is the CEO name*
+*all the tweets from the CEO/CFO/CMO, here the 'account_name' is the CEO/CFO/CMO name*
 
 **Scores:**
 
 Vader score, LIWC in separate file
 
-### vader_score/ceo_tweets_all_vader.csv
+### vader_score/ceo_tweets_all_vader.csv 
 ### liwc/liwc_all_tweets_c_suit_ceo.csv
 
+### vader_score/cmo_tweets_all_vader.csv (new)
+### liwc/liwc_all_tweets_c_suit_cmo.csv (new)
+
+### vader_score/cfo_tweets_all_vader.csv (new)
+### liwc/liwc_all_tweets_c_suit_cfo.csv (new)
+
+## Reference tweet for c-suit
 ### reference_conversation_tweets/ceo_reference_tweets_all.csv, all the referenced tweets from the CEO,
 
 to be determined: you need another script to match whether the retweet is from the CEO's company
@@ -158,6 +224,87 @@ Vader score, LIWC in separate file
 
 ### vader_score/ceo_tweets_reference_vader.csv
 ### liwc/liwc_ceo_reference_tweets_all.csv
+
+### vader_score/cfo_tweets_reference_vader.csv (new)
+### liwc/liwc_cfo_reference_tweets_all.csv (new)
+
+### vader_score/cmo_tweets_reference_vader.csv (new)
+### liwc/liwc_cmo_reference_tweets_all.csv (new)
+
+## ceo missing accounts:
+Nvidia Corporation
+Oracle Corporation
+Procter & Gamble
+Philip Morris International
+PayPal
+Qualcomm
+Raytheon Technologies
+Southern Company
+Simon Property Group
+AT&T Inc.
+Target Corporation
+Thermo Fisher Scientific
+Texas Instruments
+UnitedHealth Group
+Union Pacific Corporation
+United Parcel Service
+U.S. Bancorp
+Visa Inc.
+Walgreens Boots Alliance
+Wells Fargo
+Walmart
+Exxon Mobil Corp.
+
+
+## cfo missing accounts:
+
+Philip Morris International
+PayPal
+Qualcomm
+Raytheon Technologies
+Starbucks Corp.
+Southern Company
+Simon Property Group
+AT&T Inc.
+Target Corporation
+Thermo Fisher Scientific
+Tesla, Inc.
+Texas Instruments
+UnitedHealth Group
+Union Pacific Corporation
+United Parcel Service
+U.S. Bancorp
+Visa Inc.
+Verizon Communications
+Walgreens Boots Alliance
+Wells Fargo
+Walmart
+Exxon Mobil Corp.
+
+## cmo missing accounts
+
+Pfizer Inc.
+Procter & Gamble
+Philip Morris International
+PayPal
+Qualcomm
+Raytheon Technologies
+Starbucks Corp.
+Southern Company
+Simon Property Group
+AT&T Inc.
+Target Corporation
+Thermo Fisher Scientific
+Tesla, Inc.
+Texas Instruments
+UnitedHealth Group
+Union Pacific Corporation
+United Parcel Service
+U.S. Bancorp
+Walgreens Boots Alliance
+Wells Fargo
+Walmart
+Exxon Mobil Corp.
 
 # Variable Descriptions for Tweet File:
 
